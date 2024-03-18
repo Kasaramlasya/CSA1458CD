@@ -1,0 +1,22 @@
+%{
+    int max_length = 0; // Variable to store the length of the longest word
+%}
+
+%%
+
+[a-zA-Z]+   {
+                int length = strlen(yytext); // Get the length of the matched word
+                if (length > max_length) {   // If the length is greater than current max length
+                    max_length = length;      // Update max length
+                }
+            }
+
+.           ; // Ignore any other characters
+
+%%
+
+int main() {
+    yylex(); // Start the lexical analysis
+    printf("Length of the longest word: %d\n", max_length); // Print the length of the longest word
+    return 0;
+}
