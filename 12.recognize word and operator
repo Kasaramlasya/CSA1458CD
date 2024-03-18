@@ -1,0 +1,22 @@
+%{
+#include <stdio.h>
+%}
+
+%option noyywrap
+
+WORD        [a-zA-Z]+
+REL_OP      ("<"|"<="|"=="|">="|">"|"!=")
+
+%%
+
+{WORD}      { printf("Word: %s\n", yytext); }
+{REL_OP}    { printf("Relational Operator: %s\n", yytext); }
+
+.           ;
+
+%%
+
+int main() {
+    yylex();
+    return 0;
+}
