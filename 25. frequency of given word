@@ -1,0 +1,33 @@
+%{
+#include <stdio.h>
+#include <string.h>
+%}
+
+%%
+" "             
+[\t\n]         
+.              
+%%
+
+int main(int argc, char *argv[]) {
+    if (argc != 2) {
+        printf("Usage: %s <word>\n", argv[0]);
+        return 1;
+    }
+
+    char *word = argv[1];
+    int count = 0;
+
+    yylex(); // Begin lexical analysis
+
+    while (strcmp(yytext, "") != 0) {
+        if (strcmp(yytext, word) == 0) {
+            count++;
+        }
+        yylex(); // Continue lexical analysis
+    }
+
+    printf("Frequency of '%s' in the sentence: %d\n", word, count);
+
+    return 0;
+}
